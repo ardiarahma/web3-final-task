@@ -19,6 +19,7 @@ import {
 import navigation from '../../_nav';
 // routes config
 import routes from '../../routes';
+import { browserHistory } from '../../store'
 
 const DefaultAside = React.lazy(() => import('./DefaultAside'));
 const DefaultFooter = React.lazy(() => import('./DefaultFooter'));
@@ -30,7 +31,12 @@ class DefaultLayout extends Component {
 
   signOut(e) {
     e.preventDefault()
-    this.props.history.push('/login')
+    browserHistory.push('/login')
+    localStorage.clear();
+  }
+
+  componentDidMount(){
+    if(localStorage.getItem('token') === null) browserHistory.push("/login")
   }
 
   render() {

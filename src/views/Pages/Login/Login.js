@@ -15,6 +15,11 @@ class Login extends Component {
     }
   }
 
+  componentDidMount(){
+    // cek ketika user udah login dan ga logout dia auto redirect ke dashboard
+    if(localStorage.getItem('token') !== null) browserHistory.push("/")
+  }
+
   // fungsi change data 
   onChange = (e) => { // ketika kamu pake function model arrow function gini kamu gabutuh binding lagi
     const target = e.target.name; // target input
@@ -38,7 +43,7 @@ class Login extends Component {
       if(res.data.status === "success"){ //kalo success datanya disimpen hehe
         // console.log(res.data)
         localStorage.setItem('token', res.data.user.token) //diset dilocal storage biar ga ilang
-        localStorage.setItem('user', res.data.user)
+        localStorage.setItem('user', JSON.stringify(res.data.user)) // json stringfy biar datanya jadi string pas diset local, kalo nggk nanti jadi [object, object]
         // terun kalo sukses diarahin ke ??? dashboard
         browserHistory.push('/dashboard') // dah terus mana tampilan selanjutanya>
       } else {

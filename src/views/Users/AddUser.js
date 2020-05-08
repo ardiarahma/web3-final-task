@@ -19,17 +19,25 @@ class AddUser extends Component{
         instagram: '',  
         twitter: '',  
       }  
-    
-      if (props.data.id) {  
-        this.state = props.data  
-      } else {  
-        this.state = this.initialState;  
-      }  
+
+    // ini diganti componentwillmount dibawah yaa -ardia-
+    //   if (props.data.id) {  
+    //     this.state = props.data  
+    //   } else {  
+    //     this.state = this.initialState;  
+    //   }  
     
       this.handleChange = this.handleChange.bind(this);  
       this.handleSubmit = this.handleSubmit.bind(this);  
     
     }
+
+    componentWillMount(){
+        const user = JSON.parse(localStorage.getItem('user'));
+        this.setState({ id: user.id })
+        
+    }
+
     handleChange(event) {  
       const name = event.target.name;  
       const value = event.target.value;  
