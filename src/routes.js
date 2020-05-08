@@ -1,4 +1,5 @@
 import React from 'react';
+import { Card, Form } from 'reactstrap';
 
 const Breadcrumbs = React.lazy(() => import('./views/Base/Breadcrumbs'));
 const Cards = React.lazy(() => import('./views/Base/Cards'));
@@ -35,6 +36,8 @@ const Typography = React.lazy(() => import('./views/Theme/Typography'));
 const Widgets = React.lazy(() => import('./views/Widgets/Widgets'));
 const Users = React.lazy(() => import('./views/Users/Users'));
 const User = React.lazy(() => import('./views/Users/User'));
+const AddUser = React.lazy(() => import('./views/Users/AddUser'));
+const EditUser = React.lazy(() => import('./views/Users/EditUser'));
 
 // https://github.com/ReactTraining/react-router/tree/master/packages/react-router-config
 const routes = [
@@ -79,6 +82,8 @@ const routes = [
   { path: '/charts', name: 'Charts', component: Charts },
   { path: '/students', exact: true,  name: 'Users', component: Users },
   { path: '/students/:id', exact: true, name: 'User Details', component: User },
+  { path: '/student/create',  name: 'Create Student', component: AddUser },
+  { path: '/student/edit',  name: 'Edit Student', component: EditUser },
 ];
 
 export default routes;
