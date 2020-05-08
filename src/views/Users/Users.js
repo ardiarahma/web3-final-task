@@ -6,12 +6,14 @@ import usersData from './UsersData'
 import axios from 'axios'
 function UserRow(props) {
   const user = props.user
-  const userLink = `/users/${user.id}`
+  const editLink = `/student/edit/${user.id}`
+  const deleteLink = `/student/${user.id}`
+  const showLink = `/students/${user.id}`
 
   const getBadge = (action) => {
     return action === 'edit' ? 'warning' :
       action === 'delete' ? 'danger' :
-        'primary'
+        'success'
   }
 
   return (
@@ -20,13 +22,14 @@ function UserRow(props) {
       <td>{user.address}</td>
       <td>{user.phone}</td>
       <td>
-        <Link to={userLink}><Badge color={getBadge('edit')}>Edit</Badge></Link>
-        <Link to={userLink}><Badge color={getBadge('delete')}>Delete</Badge></Link>
+        <Link to={showLink}><Badge color={getBadge('show')}>Show</Badge></Link>
+        <Link to={editLink}><Badge color={getBadge('edit')}>Edit</Badge></Link>
+        <Link to={deleteLink}><Badge color={getBadge('delete')}>Delete</Badge></Link>
       </td>
     </tr>
   )
 }
-const addUser = `#`
+const addUser = `student/create`
 
 class Users extends Component {
   constructor(props) {
