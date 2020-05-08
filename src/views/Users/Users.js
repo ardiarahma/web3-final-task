@@ -1,59 +1,95 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Badge, Card, CardBody, CardHeader, Col, Row, Table } from 'reactstrap';
+import { Button, Badge, Card, CardBody, CardHeader, Col, Row, Table } from 'reactstrap';
 
 import usersData from './UsersData'
-
+import axios from 'axios'
 function UserRow(props) {
   const user = props.user
   const userLink = `/users/${user.id}`
 
-  const getBadge = (status) => {
-    return status === 'Active' ? 'success' :
-      status === 'Inactive' ? 'secondary' :
-        status === 'Pending' ? 'warning' :
-          status === 'Banned' ? 'danger' :
-            'primary'
+  const getBadge = (action) => {
+    return action === 'edit' ? 'warning' :
+      action === 'delete' ? 'danger' :
+        'primary'
   }
 
   return (
     <tr key={user.id.toString()}>
-      <th scope="row"><Link to={userLink}>{user.id}</Link></th>
-      <td><Link to={userLink}>{user.name}</Link></td>
-      <td>{user.registered}</td>
-      <td>{user.role}</td>
-      <td><Link to={userLink}><Badge color={getBadge(user.status)}>{user.status}</Badge></Link></td>
+      <td>{user.name}</td>
+      <td>{user.address}</td>
+      <td>{user.phone}</td>
+      <td>
+        <Link to={userLink}><Badge color={getBadge('edit')}>Edit</Badge></Link>
+        <Link to={userLink}><Badge color={getBadge('delete')}>Delete</Badge></Link>
+      </td>
     </tr>
   )
 }
+const addUser = `#`
 
 class Users extends Component {
+  constructor(props) {
+      super(props);
+      this.state = {
+          users: []
+      };
+  }
+  getUsersData() {
+      var token = 'Bearer ' + localStorage.getItem('token')
+      console.log(token)
+      axios.get('http://127.0.0.1:8000/api/student',{ headers: {"Authorization" : token} })
+        .then( res => {  
+              if(res.data.message === "Success"){ 
+                const data = res.data.data
+                console.log(data)
+                const users = data
+                this.setState({
+                    users
+                })
+              } else {
+                alert('gatau')
+              } 
 
+          })
+          .catch((error) => {
+              console.log(error)
+          })
+
+  }
+  componentDidMount(){
+      this.getUsersData()
+  }
   render() {
+    
 
     const userList = usersData.filter((user) => user.id < 10)
 
     return (
       <div className="animated fadeIn">
         <Row>
-          <Col xl={6}>
+          <Col xl={12}>
             <Card>
               <CardHeader>
-                <i className="fa fa-align-justify"></i> Users <small className="text-muted">example</small>
+                <i className="fa fa-align-justify"></i> Student <small className="text-muted">list</small>
               </CardHeader>
               <CardBody>
+                <Row className="align-items-center">
+                  <Col col="6" sm="4" md="2" xl="2" className="mb-3 mb-xl-0">
+                    <Link to={addUser}><Button block color="primary">Add Student</Button></Link>
+                  </Col>
+                </Row>
                 <Table responsive hover>
                   <thead>
                     <tr>
-                      <th scope="col">id</th>
-                      <th scope="col">name</th>
-                      <th scope="col">registered</th>
-                      <th scope="col">role</th>
-                      <th scope="col">status</th>
+                      <th scope="col">Name</th>
+                      <th scope="col">Address</th>
+                      <th scope="col">Phone Number</th>
+                      <th scope="col">Action</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {userList.map((user, index) =>
+                    {this.state.users.map((user, index) =>
                       <UserRow key={index} user={user}/>
                     )}
                   </tbody>
