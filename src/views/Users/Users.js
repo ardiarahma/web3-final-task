@@ -81,8 +81,8 @@ class Users extends Component {
                             <td>{user.address}</td>  
                             <td>{user.phone}</td>  
                             <td>
-                                <Button color="info" onClick={() => this.props.editUser(user.id)}>Edit</Button>       
-                                <Button color="danger" onClick={() => this.deleteUser(user.id)}>Delete</Button>  
+                                <Link to='student/edit/1'><Button color="info">Edit</Button></Link>
+                                <Button color="danger" onClick={() => this.deleteUser(user.id)}>Delete</Button> 
                             </td>  
                           </tr>  
                         ))} 

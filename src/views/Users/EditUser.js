@@ -15,10 +15,6 @@ class AddUser extends Component{
                     </CardHeader>
                     <CardBody>
                         <EditForm/>
-                        <div className="form-actions">
-                                <Button style={{marginRight:3}} type="submit" color="primary">Save changes</Button>
-                                <Button color="secondary">Cancel</Button>
-                        </div>
                     </CardBody>
                 </Card>
               </Col>
