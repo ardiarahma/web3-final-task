@@ -2,11 +2,14 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import CreateForm from '..//Componentss/StudentForm';
 import { Card, CardBody, CardHeader, Col, Row, Form, FormGroup, Label, Input, Button } from 'reactstrap';
+import axios from 'axios'
+import { browserHistory } from '../../store';
 
+const apiUrl = 'http://127.0.0.1:8000/api/'; 
+const token = 'Bearer ' + localStorage.getItem('token')
 class AddUser extends Component{
     constructor(props) {  
       super(props);  
-    
       this.initialState = {  
         id: '',  
         name: '',  
@@ -20,48 +23,50 @@ class AddUser extends Component{
         twitter: '',  
       }  
 
-    // ini diganti componentwillmount dibawah yaa -ardia-
-    //   if (props.data.id) {  
-    //     this.state = props.data  
-    //   } else {  
-    //     this.state = this.initialState;  
-    //   }  
-    
-      this.handleChange = this.handleChange.bind(this);  
-      this.handleSubmit = this.handleSubmit.bind(this);  
-    
+      this.state = this.initialState;  
     }
 
-    componentWillMount(){
-        const user = JSON.parse(localStorage.getItem('user'));
-        this.setState({ id: user.id })
-        
+    onChange = (e) => { 
+        const target = e.target.name; 
+        const value = e.target.value; 
+        // console.log('mari kita lihat', target, value)
+        this.setState({ 
+          [target]: value
+        })
     }
+    onSubmit = (e) => {
+        e.preventDefault();
+        const { name, address, class_name, place_of_birth, date_of_birth, phone, facebook,instagram,twitter } = this.state 
+        const params = {
+            name, address, class_name, place_of_birth, date_of_birth, phone, facebook,instagram,twitter
+        }
+        const config = {
+            headers: { "Authorization": token }
+        };
+        console.log(params)
+        axios.post(apiUrl + 'student', params, config)
+        // axios.post('http://127.0.0.1:8000/api/student', params) 
+        .then( res => {   
+          if(res.data.status === "success"){ 
+            alert(res.data.message)
+            // console.log(res.data)
+            browserHistory.push('/students')
+          } else {
+            alert(res.data.error[0])
+          }
+        })
+        .catch( err => {
+          console.log(err)
+        })
+    } 
 
-    handleChange(event) {  
-      const name = event.target.name;  
-      const value = event.target.value;  
-    
-      this.setState({  
-        [name]: value  
-      })  
-    }  
-    
-    handleSubmit(event) {  
-      event.preventDefault();  
-      // this.props.onFormSubmit(this.state);  
-      this.setState(this.initialState);  
-    }
     render() {
         let pageTitle;  
         let actionStatus;  
-        if (this.state.id) {  
-          pageTitle = <h2>Edit User</h2>  
-          actionStatus = <b>Update</b>  
-        } else {  
-          pageTitle = <h2>Add User</h2>  
-          actionStatus = <b>Save</b>  
-        }
+        pageTitle = <h2>Add User</h2>  
+        actionStatus = <b>Save</b>  
+        const { name, address, class_name, place_of_birth, date_of_birth, phone, facebook,instagram,twitter } = this.state
+
         return (
           <div className="animated fadeIn">
             <Row>
@@ -71,7 +76,7 @@ class AddUser extends Component{
                         {pageTitle}
                     </CardHeader>
                     <CardBody>
-                    <Form onSubmit={this.handleSubmit} className="form-horizontal">
+                    <Form  onSubmit={this.onSubmit} className="form-horizontal">
                         <FormGroup row>
                             <Col md="3">
                                 <Label htmlFor="text-input">Name</Label>
@@ -79,8 +84,8 @@ class AddUser extends Component{
                             <Col xs="12" md="9">
                                 <Input type="text"  
                                 name="name"  
-                                value={this.state.name}  
-                                onChange={this.handleChange}  
+                                value={name}  
+                                onChange={this.onChange}  
                                 placeholder="name"/>
                             </Col>
                         </FormGroup>
@@ -91,8 +96,8 @@ class AddUser extends Component{
                             <Col xs="12" md="9">
                                 <Input type="textarea"  
                                 name="address"  
-                                value={this.state.address}  
-                                onChange={this.handleChange}  
+                                value={address}  
+                                onChange={this.onChange}  
                                 placeholder="address"/>
                             </Col>
                         </FormGroup>
@@ -103,8 +108,8 @@ class AddUser extends Component{
                             <Col xs="12" md="9">
                                 <Input type="text"  
                                 name="class_name"  
-                                value={this.state.class_name}  
-                                onChange={this.handleChange}  
+                                value={class_name}  
+                                onChange={this.onChange}  
                                 placeholder="class_name"/>
                             </Col>
                         </FormGroup>
@@ -115,8 +120,8 @@ class AddUser extends Component{
                             <Col xs="12" md="9">
                                 <Input type="text"  
                                 name="place_of_birth"  
-                                value={this.state.place_of_birth}  
-                                onChange={this.handleChange}  
+                                value={place_of_birth}  
+                                onChange={this.onChange}  
                                 placeholder="place_of_birth"/>
                             </Col>
                         </FormGroup>
@@ -127,8 +132,8 @@ class AddUser extends Component{
                             <Col xs="12" md="9">
                                 <Input type="date"  
                                 name="date_of_birth"  
-                                value={this.state.date_of_birth}  
-                                onChange={this.handleChange}  
+                                value={date_of_birth}  
+                                onChange={this.onChange}  
                                 placeholder="date_of_birth"/>
                             </Col>
                         </FormGroup>
@@ -139,8 +144,8 @@ class AddUser extends Component{
                             <Col xs="12" md="9">
                                 <Input type="number"  
                                 name="phone"  
-                                value={this.state.phone}  
-                                onChange={this.handleChange}  
+                                value={phone}  
+                                onChange={this.onChange}  
                                 placeholder="phone"/>
                             </Col>
                         </FormGroup>
@@ -151,8 +156,8 @@ class AddUser extends Component{
                             <Col xs="12" md="9">
                                 <Input type="text"  
                                 name="facebook"  
-                                value={this.state.facebook}  
-                                onChange={this.handleChange}  
+                                value={facebook}  
+                                onChange={this.onChange}  
                                 placeholder="facebook"/>
                             </Col>
                         </FormGroup>
@@ -163,8 +168,8 @@ class AddUser extends Component{
                             <Col xs="12" md="9">
                                 <Input type="text"  
                                 name="instagram"  
-                                value={this.state.instagram}  
-                                onChange={this.handleChange}  
+                                value={instagram}  
+                                onChange={this.onChange}  
                                 placeholder="instagram"/>
                             </Col>
                         </FormGroup>
@@ -175,17 +180,16 @@ class AddUser extends Component{
                             <Col xs="12" md="9">
                                 <Input type="text"  
                                 name="twitter"  
-                                value={this.state.twitter}  
-                                onChange={this.handleChange}  
+                                value={twitter}  
+                                onChange={this.onChange}  
                                 placeholder="twitter"/>
                             </Col>
-                            <Input type="hidden" name="id" value={this.state.id}/>
                         </FormGroup>     
-                    </Form>
                     <div className="form-actions">
                             <Button style={{marginRight:3}} type="submit" color="primary">{actionStatus}</Button>
                             <Button color="secondary">Cancel</Button>
                     </div>
+                    </Form>
                     </CardBody>
                 </Card>
               </Col>
