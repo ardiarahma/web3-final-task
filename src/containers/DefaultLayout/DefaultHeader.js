@@ -6,6 +6,8 @@ import PropTypes from 'prop-types';
 import { AppAsideToggler, AppNavbarBrand, AppSidebarToggler } from '@coreui/react';
 import logo from '../../assets/img/brand/logo.svg'
 import sygnet from '../../assets/img/brand/sygnet.svg'
+import axios from 'axios'
+import { browserHistory } from '../../store';
 
 const propTypes = {
   children: PropTypes.node,
@@ -18,6 +20,17 @@ class DefaultHeader extends Component {
 
     // eslint-disable-next-line
     const { children, ...attributes } = this.props;
+    const token = 'Bearer ' + localStorage.getItem('token')
+    const handleLogout = () => {
+      axios.get('http://127.0.0.1:8000/api/logout', { headers: {"Authorization" : token} })
+      .then( res => {   
+          localStorage.clear();
+          browserHistory.push('/login')
+      })
+      .catch( err => {
+        console.log(err)
+      })
+    }
 
     return (
       <React.Fragment>
@@ -66,7 +79,7 @@ class DefaultHeader extends Component {
               <DropdownItem><i className="fa fa-file"></i> Projects<Badge color="primary">42</Badge></DropdownItem>
               <DropdownItem divider />
               <DropdownItem><i className="fa fa-shield"></i> Lock Account</DropdownItem> */}
-              <DropdownItem onClick={e => this.props.onLogout(e)}><i className="fa fa-lock"></i> Logout</DropdownItem>
+              <DropdownItem onClick={handleLogout}><i className="fa fa-lock"></i> Logout</DropdownItem>
             </DropdownMenu>
           </UncontrolledDropdown>
         </Nav>
