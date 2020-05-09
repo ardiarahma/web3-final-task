@@ -57,7 +57,7 @@ class StudentForm extends Component{
           .catch( err => {
             console.log(err)
           })
-      } 
+      }
 
     render() {
         let actionStatus;  
