@@ -81,7 +81,7 @@ class Users extends Component {
                             <td>{user.address}</td>  
                             <td>{user.phone}</td>  
                             <td>
-                                <Link to='student/edit/1'><Button color="info">Edit</Button></Link>
+                                <Link to={"/student/edit/" + user.id}><Button color="info">Edit</Button></Link>
                                 <Button color="danger" onClick={() => this.deleteUser(user.id)}>Delete</Button> 
                             </td>  
                           </tr>  
