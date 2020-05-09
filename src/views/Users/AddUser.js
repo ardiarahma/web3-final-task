@@ -24,7 +24,11 @@ class AddUser extends Component{
       instagram: '',  
       twitter: '',  
     }
-    this.state = this.initialState;  
+    if (this.props.match.params.id) {
+      this.state = {};
+    } else {
+      this.state = this.initialState;
+    }  
   }
 
   onChange = (e) => { 
@@ -70,30 +74,27 @@ class AddUser extends Component{
       }
       
   }
-  getUserData() {
-      axios.get(apiUrl + 'student/' + this.props.match.params.id,{ headers: {"Authorization" : token} })
-      .then( res => {  
+      
+    componentDidMount(){
+        if (this.props.match.params.id) {
+          axios.get(apiUrl + 'student/' + this.props.match.params.id,{ headers: {"Authorization" : token} })
+          .then( res => {  
             if(res.data.message === "Success"){ 
               const data = res.data.data
               const users = data
-              console.log(this.state)
-              this.setState({
-                  users
-              })
+              console.log(data)
+              this.setState({  
+                  users  
+              });  
               console.log(this.state.users)
             } else {
               alert('gatau')
             } 
+          })
+          .catch((error) => {
+              console.log(error)
+          })
 
-        })
-        .catch((error) => {
-            console.log(error)
-        })
-
-    }
-    componentDidMount(){
-        if (this.props.match.params.id) {
-          this.getUserData()
         }
     }
     render() {
@@ -101,10 +102,10 @@ class AddUser extends Component{
         let actionStatus;  
         let title;  
         if (this.props.match.params.id) {
-          actionStatus = <b>Update</b>  
+          actionStatus = "Update"  
           title = "Update Student's Data"
         } else{
-          actionStatus = <b>Save</b>  
+          actionStatus = "Save"  
           title = "Add Student's Data"
         }
         return (
