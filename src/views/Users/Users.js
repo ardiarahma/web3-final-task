@@ -62,11 +62,11 @@ class Users extends Component {
                 <CardBody>
                   <Row className="align-items-center">
                     <Col col="6" sm="4" md="2" xl="2" className="mb-3 mb-xl-0">
-                      <Link to={addUser}><Button block color="primary">Add Student</Button></Link>
+                      <Link to={addUser}><Button block color="primary" style={{marginBottom:10}}>Add Student</Button></Link>
                     </Col>
                   </Row>
-                  <Table responsive hover>
-                    <thead>
+                  <Table hover responsive className="table-outline mb-0 d-none d-sm-table">
+                    <thead className="thead-light">
                       <tr>
                         <th scope="col">Name</th>
                         <th scope="col">Address</th>
@@ -81,7 +81,7 @@ class Users extends Component {
                             <td>{user.address}</td>  
                             <td>{user.phone}</td>  
                             <td>
-                                <Link to='student/edit/1'><Button color="info">Edit</Button></Link>
+                                <Link to='student/edit/1'><Button color="info" style={{marginRight:10}}>Edit</Button></Link>
                                 <Button color="danger" onClick={() => this.deleteUser(user.id)}>Delete</Button> 
                             </td>  
                           </tr>  
