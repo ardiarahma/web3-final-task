@@ -7,16 +7,13 @@ import { browserHistory } from '../../store';
 
 class AddUser extends Component{
     render() {
-        let pageTitle;  
-        pageTitle = <h2>Add User</h2>  
-
         return (
           <div className="animated fadeIn">
             <Row>
               <Col xl={12}>
                 <Card>
                     <CardHeader>
-                        {pageTitle}
+                        Add Student's Data
                     </CardHeader>
                     <CardBody>
                         <CreateForm/>
