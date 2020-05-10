@@ -47,11 +47,12 @@ class Login extends Component {
         // terun kalo sukses diarahin ke ??? dashboard
         browserHistory.push('/dashboard') // dah terus mana tampilan selanjutanya>
       } else {
-        alert('gatau')
+        alert(res.data.message)
       }
     })
     .catch( err => {
-      console.log(err)
+        alert('Error')
+        console.log(err)
     })
   }
 

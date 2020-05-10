@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Button, Badge, Card, CardBody, CardHeader, Col, Row, Table } from 'reactstrap';
+import { Button, Card, CardBody, CardHeader, Col, Row, Table } from 'reactstrap';
 
 import axios from 'axios'
 
 const apiUrl = 'http://127.0.0.1:8000/api/'; 
 const token = 'Bearer ' + localStorage.getItem('token')
+const config = {
+  headers: { "Authorization": token }
+};
 const addUser = `student/create`
 
 class Users extends Component {
@@ -19,7 +22,7 @@ class Users extends Component {
   }
   
   componentDidMount(){
-      axios.get(apiUrl + 'student',{ headers: {"Authorization" : token} })
+      axios.get(apiUrl + 'student', config)
       .then(response => response.data).then(  
         (result)=>{  
             this.setState({  
@@ -33,7 +36,7 @@ class Users extends Component {
   }
   deleteUser(userId) {  
     const { users } = this.state;     
-    axios.delete(apiUrl + 'student/' + userId,{ headers: {"Authorization" : token} }).then(result=>{  
+    axios.delete(apiUrl + 'student/' + userId, config).then(result=>{  
      alert(result.data.message);  
       this.setState({  
         response:result,  
@@ -42,8 +45,6 @@ class Users extends Component {
     });  
   }
   render() {
-    
-
     const{error,users}=this.state;
     if(error){  
         return(  

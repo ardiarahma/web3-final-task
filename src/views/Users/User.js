@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
-import { Card, CardBody, CardHeader, Col, Row, Table } from 'reactstrap';
+import { Card, CardBody, CardHeader, Col, Row, Table ,Button} from 'reactstrap';
+import { Link } from 'react-router-dom';
 import axios from 'axios'
-
-import usersData from './UsersData'
-
+const apiUrl = 'http://127.0.0.1:8000/api/'; 
+const token = 'Bearer ' + localStorage.getItem('token')
+const config = {
+  headers: { "Authorization": token }
+};
 class User extends Component {
   constructor(props) {
       super(props);
@@ -12,13 +15,11 @@ class User extends Component {
       };
   }
   getUsersData() {
-      var token = 'Bearer ' + localStorage.getItem('token')
-      axios.get('http://127.0.0.1:8000/api/student/',{ headers: {"Authorization" : token} })
+      axios.get(apiUrl + "student/" + this.props.match.params.id, config)
         .then( res => {  
               if(res.data.message === "Success"){ 
                 const data = res.data.data
-                console.log(data)
-                const users = data
+                const users = data[0]
                 this.setState({
                     users
                 })
@@ -36,11 +37,8 @@ class User extends Component {
       this.getUsersData()
   }
   render() {
-
-    const user = this.state.users.find( user => user.id.toString() === this.props.match.params.id)
-
+    const user = this.state.users
     const userDetails = user ? Object.entries(user) : [['id', (<span><i className="text-muted icon-ban"></i> Not found</span>)]]
-
     return (
       <div className="animated fadeIn">
         <Row>
@@ -64,6 +62,9 @@ class User extends Component {
                       }
                     </tbody>
                   </Table>
+                  <div className="form-actions">
+                      <Link to="/students"><Button color="secondary">Back</Button></Link>
+                  </div>
               </CardBody>
             </Card>
           </Col>

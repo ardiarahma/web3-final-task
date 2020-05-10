@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import CreateForm from '..//Componentss/StudentForm';
 import { Card, CardBody, CardHeader, Col, Row, Form, FormGroup, Label, Input, Button } from 'reactstrap';
 import axios from 'axios'
 import { browserHistory } from '../../store';
@@ -12,7 +11,7 @@ const config = {
 class AddUser extends Component{
   constructor(props) {  
     super(props);  
-    this.initialState = {  
+    this.initialState = { 
       id: '',  
       name: '',  
       address: '',  
@@ -24,11 +23,11 @@ class AddUser extends Component{
       instagram: '',  
       twitter: '',  
     }
-    if (this.props.match.params.id) {
-      this.state = {};
-    } else {
-      this.state = this.initialState;
-    }  
+    if (this.props.match.params.id){
+        this.state = this.initialState;
+    } else{
+        this.state = this.initialState;
+    }
   }
 
   onChange = (e) => { 
@@ -77,16 +76,22 @@ class AddUser extends Component{
       
     componentDidMount(){
         if (this.props.match.params.id) {
-          axios.get(apiUrl + 'student/' + this.props.match.params.id,{ headers: {"Authorization" : token} })
+          axios.get(apiUrl + 'student/' + this.props.match.params.id + '/edit', config)
           .then( res => {  
             if(res.data.message === "Success"){ 
-              const data = res.data.data
-              const users = data
-              console.log(data)
+              const users = res.data.data
               this.setState({  
-                  users  
+                id: '',  
+                name: users.name,  
+                address: users.address,  
+                class_name: users.class_name,  
+                place_of_birth: users.place_of_birth,  
+                date_of_birth: users.date_of_birth,  
+                phone: users.phone,  
+                facebook: users.facebook,  
+                instagram: users.instagram,  
+                twitter: users.twitter,  
               });  
-              console.log(this.state.users)
             } else {
               alert('gatau')
             } 
