@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Card, CardBody, CardHeader, Col, Row, Form, FormGroup, Label, Input, Button } from 'reactstrap';
 import axios from 'axios'
 import { browserHistory } from '../../store';
-const apiUrl = 'http://127.0.0.1:8000/api/'; 
+const apiUrl = 'http://yb-api.technow.id/api/'; 
 const token = 'Bearer ' + localStorage.getItem('token')
 const config = {
   headers: { "Authorization": token }

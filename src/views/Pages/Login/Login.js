@@ -38,7 +38,7 @@ class Login extends Component {
       email, password,
     }
     console.log(params)
-    axios.post('http://127.0.0.1:8000/api/login', params) //kalo udah dideploy jan lupa diganti urlnya
+    axios.post('http://yb-api.technow.id/api/login', params) //kalo udah dideploy jan lupa diganti urlnya
     .then( res => {   
       if(res.data.status === "success"){ //kalo success datanya disimpen hehe
         // console.log(res.data)
