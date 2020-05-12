@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Link, NavLink } from 'react-router-dom';
-import { Badge, UncontrolledDropdown, DropdownItem, DropdownMenu, DropdownToggle, Nav, NavItem } from 'reactstrap';
+import {  UncontrolledDropdown, DropdownItem, DropdownMenu, DropdownToggle, Nav, NavItem } from 'reactstrap';
 import PropTypes from 'prop-types';
 
-import { AppAsideToggler, AppNavbarBrand, AppSidebarToggler } from '@coreui/react';
+import {  AppNavbarBrand, AppSidebarToggler } from '@coreui/react';
 import sygnet from '../../assets/img/brand/sygnet.svg'
 import axios from 'axios'
 import { browserHistory } from '../../store';

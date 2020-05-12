@@ -7,16 +7,8 @@ import {
   AppAside,
   AppFooter,
   AppHeader,
-  AppSidebar,
-  AppSidebarFooter,
-  AppSidebarForm,
-  AppSidebarHeader,
-  AppSidebarMinimizer,
   AppBreadcrumb2 as AppBreadcrumb,
-  AppSidebarNav2 as AppSidebarNav,
 } from '@coreui/react';
-// sidebar nav config
-import navigation from '../../_nav';
 // routes config
 import routes from '../../routes';
 import { browserHistory } from '../../store'

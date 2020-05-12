@@ -1,5 +1,4 @@
 import React from 'react';
-import { Card, Form } from 'reactstrap';
 
 const Breadcrumbs = React.lazy(() => import('./views/Base/Breadcrumbs'));
 const Cards = React.lazy(() => import('./views/Base/Cards'));
