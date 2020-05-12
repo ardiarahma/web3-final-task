@@ -1,5 +1,5 @@
 import React, { Component, lazy, Suspense } from 'react';
-import { Card,  CardBody, Col, Row,  UncontrolledCarousel } from 'reactstrap';
+import { Card,  CardBody, Col, Row,  UncontrolledCarousel,  } from 'reactstrap';
 
 import { getStyle, hexToRgba } from '@coreui/coreui/dist/js/coreui-utilities'
 import axios from 'axios'
@@ -46,7 +46,12 @@ class Dashboard extends Component {
     super(props);
     this.state = {
         error:null,
-        users: [],
+        cluster1: '',  
+        cluster2: '',  
+        cluster3: '',
+        countCluster1: '',  
+        countCluster2: '',  
+        countCluster3: '', 
         response: {}
     };
   }
@@ -54,9 +59,14 @@ class Dashboard extends Component {
   componentDidMount(){
     axios.get(apiUrl + 'cluster-count', config)
     .then(response => response.data).then(  
-      (result)=>{  
-          this.setState({  
-              users:result.data  
+      (result)=>{
+        this.setState({  
+            cluster1: result.data[0].cluster,  
+            cluster2: result.data[1].cluster,  
+            cluster3: result.data[2].cluster, 
+            countCluster1: result.data[0].count,  
+            countCluster2: result.data[1].count,  
+            countCluster3: result.data[2].count,   
           });  
       },  
       (error)=>{  
@@ -69,7 +79,7 @@ class Dashboard extends Component {
   
 
   render() {
-    const{error,users}=this.state;
+    const { error, cluster1, cluster2, cluster3, countCluster1, countCluster2, countCluster3 } = this.state
     if(error){  
         return(  
             <div>Error:{error.message}</div>  
@@ -82,8 +92,8 @@ class Dashboard extends Component {
           <Col xs="12" sm="6" lg="4">
             <Card className="text-white bg-primary">
               <CardBody className="pb-0" style={{ marginBottom:35, textAlign:'center'}}>  
-                <div className="text-value" style={{ fontSize : 50 }}>xxx </div>
-                <div style={{ fontSize : 20 }}>Science</div>             
+                <div className="text-value" style={{ fontSize : 50 }}>{countCluster1}</div>
+                <div style={{ fontSize : 20 }}>{cluster1}</div>             
               </CardBody>
               {/* <div className="chart-wrapper mx-3" style={{ height: '70px' }}>
                 <Line data={cardChartData1} options={cardChartOpts1} height={70} />
@@ -94,8 +104,8 @@ class Dashboard extends Component {
           <Col xs="12" sm="6" lg="4">
             <Card className="text-white bg-warning">
               <CardBody className="pb-0" style={{ marginBottom:35, textAlign:'center'}}>
-                <div className="text-value" style={{ fontSize :50 }} >9.823</div>
-                <div style={{ fontSize : 20 }}>Social</div>
+                <div className="text-value" style={{ fontSize :50 }} >{countCluster2}</div>
+                <div style={{ fontSize : 20 }}>{cluster2}</div>
               </CardBody>
               {/* <div className="chart-wrapper" style={{ height: '70px' }}>
                 <Line data={cardChartData3} options={cardChartOpts3} height={70} />
@@ -106,8 +116,8 @@ class Dashboard extends Component {
           <Col xs="12" sm="6" lg="4">
             <Card className="text-white bg-danger">
               <CardBody className="pb-0" style={{  marginBottom:35, textAlign:'center'}}>
-                <div className="text-value" style={{ fontSize : 50 }} >9.823</div>
-                <div style={{ fontSize : 20 }}>Language</div>
+                <div className="text-value" style={{ fontSize : 50 }} >{countCluster3}</div>
+                <div style={{ fontSize : 20 }}>{cluster3}</div>
               </CardBody>
               {/* <div className="chart-wrapper mx-3" style={{ height: '70px' }}>
                 <Bar data={cardChartData4} options={cardChartOpts4} height={70} />
