@@ -5,47 +5,41 @@ import axios from 'axios'
 import { browserHistory } from '../../../store';
 
 class Login extends Component {
-  // sebenernya harusnya gini, ketika kamu butuh binding data (function lama yg bukan arroww function ex: f(){} )
-  // itulah kenawhy saya gapake constructor
-  constructor(props){ // ini serah u mau pake apa nggkgosahheehhh
+  constructor(props){ 
     super(props)
     this.state = {
-      email: '', //define email buat dinamis
+      email: '', 
       password: '',
     }
   }
 
   componentDidMount(){
-    // cek ketika user udah login dan ga logout dia auto redirect ke dashboard
     if(localStorage.getItem('token') !== null) browserHistory.push("/")
   }
 
   // fungsi change data 
-  onChange = (e) => { // ketika kamu pake function model arrow function gini kamu gabutuh binding lagi
-    const target = e.target.name; // target input
-    const value = e.target.value; // target input ini field input email mana woy
-    // console.log('mari kita lihat', target, value)
-    this.setState({ //buat nge set/update value dari si state
+  onChange = (e) => {
+    const target = e.target.name; 
+    const value = e.target.value; 
+    this.setState({
       [target]: value
     })
   }
 
   // fungsi buat handle submit
   onSubmit = (e) => {
-    e.preventDefault(); // biar ga reload dom browsermu
+    e.preventDefault(); 
     const { email, password } = this.state // deconstructuring object state
     const params = {
       email, password,
     }
     console.log(params)
-    axios.post('http://yb-api.technow.id/api/login', params) //kalo udah dideploy jan lupa diganti urlnya
+    axios.post('http://yb-api.technow.id/api/login', params) 
     .then( res => {   
-      if(res.data.status === "success"){ //kalo success datanya disimpen hehe
-        // console.log(res.data)
-        localStorage.setItem('token', res.data.user.token) //diset dilocal storage biar ga ilang
-        localStorage.setItem('user', JSON.stringify(res.data.user)) // json stringfy biar datanya jadi string pas diset local, kalo nggk nanti jadi [object, object]
-        // terun kalo sukses diarahin ke ??? dashboard
-        browserHistory.push('/dashboard') // dah terus mana tampilan selanjutanya>
+      if(res.data.status === "success"){ 
+        localStorage.setItem('token', res.data.user.token) 
+        localStorage.setItem('user', JSON.stringify(res.data.user)) 
+        browserHistory.push('/dashboard') 
       } else {
         alert(res.data.message)
       }
@@ -57,7 +51,7 @@ class Login extends Component {
   }
 
   render() {
-    const { email, password } = this.state // deconstructuring this.state kalo datanya dikit emang ga kerasa tapi kalo udah banyak mending diginiin aja
+    const { email, password } = this.state 
     return (
       <div className="app flex-row align-items-center">
         <Container>
@@ -81,9 +75,9 @@ class Login extends Component {
                           type="email"
                           placeholder="Email"
                           autoComplete="email"
-                          name="email" // name harus sama kayak define di state
-                          value={email} // dipake value statenya
-                          onChange={this.onChange} // fungtion onChange dipake disini
+                          name="email" 
+                          value={email} 
+                          onChange={this.onChange} 
                         />
                       </InputGroup>
                       <InputGroup className="mb-4">
@@ -104,7 +98,7 @@ class Login extends Component {
                       <Row>
                         <Col xs="6">
                           <Button
-                            type="submit" //typenya submit buat trigger onSubmit dari form yg tadi
+                            type="submit" 
                             color="primary"
                             className="px-4"
                           >Login</Button>
