@@ -3,10 +3,10 @@
   "version": "2.6.0",
   "description": "CoreUI React Open Source Bootstrap 4 Admin Template",
   "author": "Łukasz Holeczek",
-  "homepage": "https://coreui.io",
+  "homepage": "https://ardiarahma.github.io/web3-final-task/",
   "copyright": "Copyright 2017-2019 creativeLabs Łukasz Holeczek",
   "license": "MIT",
-  "private": true,
+  "private": false,
   "repository": {
     "type": "git",
     "url": "git@github.com:coreui/coreui-free-react-admin-template.git"
@@ -39,12 +39,15 @@
     "simple-line-icons": "^2.4.1"
   },
   "devDependencies": {
+    "gh-pages": "^2.2.0",
     "react-scripts": "^3.4.1"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "test:cov": "npm test -- --coverage --watchAll=false",
     "test:debug": "react-scripts --inspect-brk test --runInBand",
     "eject": "react-scripts eject"
