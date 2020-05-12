@@ -70,6 +70,7 @@ class Users extends Component {
                     <thead className="thead-light">
                       <tr>
                         <th scope="col">Name</th>
+                        <th scope="col">Class</th>
                         <th scope="col">Address</th>
                         <th scope="col">Phone Number</th>
                         <th scope="col">Action</th>
@@ -79,6 +80,7 @@ class Users extends Component {
                         {users.map(user => (  
                           <tr key={user.id}>  
                             <td>{user.name}</td>  
+                            <td>{user.class_name}</td>  
                             <td>{user.address}</td>  
                             <td>{user.phone}</td>  
                             <td>

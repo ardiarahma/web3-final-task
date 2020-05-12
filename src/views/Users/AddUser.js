@@ -41,9 +41,9 @@ class AddUser extends Component{
   }
   onSubmit = (e) => {
       e.preventDefault();
-      const { name, address, class_name, place_of_birth, date_of_birth, phone, facebook,instagram,twitter } = this.state 
+      const { name, address, cluster, class_name, place_of_birth, date_of_birth, phone, facebook,instagram,twitter } = this.state 
       const params = {
-          name, address, class_name, place_of_birth, date_of_birth, phone, facebook,instagram,twitter
+          name, address, cluster, class_name, place_of_birth, date_of_birth, phone, facebook,instagram,twitter
       }
       if (this.props.match.params.id) {
           axios.put(apiUrl + 'student/' + this.props.match.params.id, params, config)
@@ -105,7 +105,7 @@ class AddUser extends Component{
         }
     }
     render() {
-        const { name, address, class_name, place_of_birth, date_of_birth, phone, facebook,instagram,twitter } = this.state
+        const { name, address, cluster, class_name, place_of_birth, date_of_birth, phone, facebook,instagram,twitter } = this.state
         let actionStatus;  
         let title;  
         if (this.props.match.params.id) {
@@ -153,12 +153,20 @@ class AddUser extends Component{
                             <Col md="3">
                                 <Label htmlFor="text-input">Cluster</Label>
                             </Col>
-                            <Col xs="12" md="9">
+                            {/* <Col xs="12" md="9">
                                 <Input type="text"  
                                 name="cluster"  
-                                
+                                value={cluster}  
                                 onChange={this.onChange}  
                                 placeholder="cluster"/>
+                            </Col> */}
+                            <Col xs="12" md="9">
+                                <Input type="select" name="cluster" value={cluster} onChange={this.onChange} placeholder="cluster" id="select">
+                                  <option value="">select cluster</option>
+                                  <option value="Science">Science</option>
+                                  <option value="Social">Social</option>
+                                  <option value="Language">Language</option>
+                                </Input>
                             </Col>
                         </FormGroup>
                         <FormGroup row>
