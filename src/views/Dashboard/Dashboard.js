@@ -1,29 +1,10 @@
 import React, { Component, lazy, Suspense } from 'react';
 import { Bar, Line } from 'react-chartjs-2';
 import {
-  Badge,
-  Button,
-  ButtonDropdown,
-  ButtonGroup,
-  ButtonToolbar,
   Card,
   CardBody,
-  CardFooter,
-  CardHeader,
-  CardTitle,
   Col,
-  Dropdown,
-  DropdownItem,
-  DropdownMenu,
-  DropdownToggle,
-  Progress,
   Row,
-  Table,
-  Carousel,
-  CarouselItem,
-  CarouselCaption,
-  CarouselIndicators,
-  CarouselControl,
   UncontrolledCarousel
 } from 'reactstrap';
 import { CustomTooltips } from '@coreui/coreui-plugin-chartjs-custom-tooltips';
@@ -339,7 +320,7 @@ class Dashboard extends Component {
       <div className="animated fadeIn">
         
         <Row>
-          <Col xs="12" sm="6" lg="3">
+          {/* <Col xs="12" sm="6" lg="3">
             <Card className="text-white bg-info">
               <CardBody className="pb-0">
 
@@ -350,41 +331,41 @@ class Dashboard extends Component {
                 <Line data={cardChartData2} options={cardChartOpts2} height={70} />
               </div>
             </Card>
-          </Col>
+          </Col> */}
 
-          <Col xs="12" sm="6" lg="3">
+          <Col xs="12" sm="6" lg="4">
             <Card className="text-white bg-primary">
-              <CardBody className="pb-0">
-                <div className="text-value">9.823</div>
-                <div>Science</div>
+              <CardBody className="pb-0" style={{ marginBottom:35, textAlign:'center'}}>
+                <div className="text-value" style={{ fontSize : 50 }} >9.823</div>
+                <div style={{ fontSize : 20 }}>Science</div>
               </CardBody>
-              <div className="chart-wrapper mx-3" style={{ height: '70px' }}>
+              {/* <div className="chart-wrapper mx-3" style={{ height: '70px' }}>
                 <Line data={cardChartData1} options={cardChartOpts1} height={70} />
-              </div>
+              </div> */}
             </Card>
           </Col>
 
-          <Col xs="12" sm="6" lg="3">
+          <Col xs="12" sm="6" lg="4">
             <Card className="text-white bg-warning">
-              <CardBody className="pb-0">
-                <div className="text-value">9.823</div>
-                <div>Social</div>
+              <CardBody className="pb-0" style={{ marginBottom:35, textAlign:'center'}}>
+                <div className="text-value" style={{ fontSize :50 }} >9.823</div>
+                <div style={{ fontSize : 20 }}>Social</div>
               </CardBody>
-              <div className="chart-wrapper" style={{ height: '70px' }}>
+              {/* <div className="chart-wrapper" style={{ height: '70px' }}>
                 <Line data={cardChartData3} options={cardChartOpts3} height={70} />
-              </div>
+              </div> */}
             </Card>
           </Col>
 
-          <Col xs="12" sm="6" lg="3">
+          <Col xs="12" sm="6" lg="4">
             <Card className="text-white bg-danger">
-              <CardBody className="pb-0">
-                <div className="text-value">9.823</div>
-                <div>Language</div>
+              <CardBody className="pb-0" style={{  marginBottom:35, textAlign:'center'}}>
+                <div className="text-value" style={{ fontSize : 50 }} >9.823</div>
+                <div style={{ fontSize : 20 }}>Language</div>
               </CardBody>
-              <div className="chart-wrapper mx-3" style={{ height: '70px' }}>
+              {/* <div className="chart-wrapper mx-3" style={{ height: '70px' }}>
                 <Bar data={cardChartData4} options={cardChartOpts4} height={70} />
-              </div>
+              </div> */}
             </Card>
           </Col>
         </Row>
