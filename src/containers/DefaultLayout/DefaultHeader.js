@@ -22,7 +22,7 @@ class DefaultHeader extends Component {
     const { children, ...attributes } = this.props;
     const token = 'Bearer ' + localStorage.getItem('token')
     const handleLogout = () => {
-      axios.get('http://yb-api.technow.id/api/logout', { headers: {"Authorization" : token} })
+      axios.get('https://cors-anywhere.herokuapp.com/http://yb-api.technow.id/api/logout', { headers: {"Authorization" : token} })
       .then( res => {   
           localStorage.clear();
           browserHistory.push('/login')

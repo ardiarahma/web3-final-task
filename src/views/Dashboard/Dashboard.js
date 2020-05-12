@@ -4,11 +4,12 @@ import { Card,  CardBody, Col, Row,  UncontrolledCarousel,  } from 'reactstrap';
 import { getStyle, hexToRgba } from '@coreui/coreui/dist/js/coreui-utilities'
 import axios from 'axios'
 
-const apiUrl = 'http://yb-api.technow.id/api/'; 
+const apiUrl = 'https://cors-anywhere.herokuapp.com/http://yb-api.technow.id/api/'; 
 const token = 'Bearer ' + localStorage.getItem('token')
 const config = {
   headers: { "Authorization": token }
 };
+
 
 const brandPrimary = getStyle('--primary')
 const brandSuccess = getStyle('--success')

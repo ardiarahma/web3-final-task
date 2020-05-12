@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Card, CardBody, CardHeader, Col, Row, Table ,Button} from 'reactstrap';
 import { Link } from 'react-router-dom';
 import axios from 'axios'
-const apiUrl = 'http://yb-api.technow.id/api/'; 
+const apiUrl = 'https://cors-anywhere.herokuapp.com/http://yb-api.technow.id/api/'; 
 const token = 'Bearer ' + localStorage.getItem('token')
 const config = {
   headers: { "Authorization": token }

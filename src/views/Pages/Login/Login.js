@@ -33,8 +33,7 @@ class Login extends Component {
     const params = {
       email, password,
     }
-    console.log(params)
-    axios.post('http://yb-api.technow.id/api/login', params) 
+    axios.post('https://cors-anywhere.herokuapp.com/http://yb-api.technow.id/api/login', params) 
     .then( res => {   
       if(res.data.status === "success"){ 
         localStorage.setItem('token', res.data.user.token) 
