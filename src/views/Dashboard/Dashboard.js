@@ -1,7 +1,5 @@
-import React, { Component, lazy, Suspense } from 'react';
-import { Card,  CardBody, Col, Row,  UncontrolledCarousel,  } from 'reactstrap';
-
-import { getStyle, hexToRgba } from '@coreui/coreui/dist/js/coreui-utilities'
+import React, { Component } from 'react';
+import { Card,  CardBody, Col, Row,  UncontrolledCarousel  } from 'reactstrap';
 import axios from 'axios'
 
 const apiUrl = 'http://yb-api.technow.id/api/'; 
@@ -10,30 +8,32 @@ const config = {
   headers: { "Authorization": token }
 };
 
-const brandPrimary = getStyle('--primary')
-const brandSuccess = getStyle('--success')
-const brandInfo = getStyle('--info')
-const brandWarning = getStyle('--warning')
-const brandDanger = getStyle('--danger')
-
 const items = [
   {
     src : './images/1.jpg',
+    altText: '',
+    caption: '',
     header: '',
     key: '1'
   },
   {
     src: './images/2.jpg',
+    altText: '',
+    caption: '',
     header: '',
     key: '2'
   },
   {
     src: './images/3.jpg',
+    altText: '',
+    caption: '',
     header: '',
     key: '3'
   },
   {
     src: './images/4.jpg',
+    altText: '',
+    caption: '',
     header: '',
     key: '4'
   }
@@ -95,9 +95,6 @@ class Dashboard extends Component {
                 <div className="text-value" style={{ fontSize : 50 }}>{countCluster1}</div>
                 <div style={{ fontSize : 20 }}>{cluster1}</div>             
               </CardBody>
-              {/* <div className="chart-wrapper mx-3" style={{ height: '70px' }}>
-                <Line data={cardChartData1} options={cardChartOpts1} height={70} />
-              </div> */}
             </Card>
           </Col>
 
@@ -107,9 +104,6 @@ class Dashboard extends Component {
                 <div className="text-value" style={{ fontSize :50 }} >{countCluster2}</div>
                 <div style={{ fontSize : 20 }}>{cluster2}</div>
               </CardBody>
-              {/* <div className="chart-wrapper" style={{ height: '70px' }}>
-                <Line data={cardChartData3} options={cardChartOpts3} height={70} />
-              </div> */}
             </Card>
           </Col>
 
@@ -119,9 +113,6 @@ class Dashboard extends Component {
                 <div className="text-value" style={{ fontSize : 50 }} >{countCluster3}</div>
                 <div style={{ fontSize : 20 }}>{cluster3}</div>
               </CardBody>
-              {/* <div className="chart-wrapper mx-3" style={{ height: '70px' }}>
-                <Bar data={cardChartData4} options={cardChartOpts4} height={70} />
-              </div> */}
             </Card>
           </Col>
         </Row>
