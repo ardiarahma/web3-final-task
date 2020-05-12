@@ -1,13 +1,14 @@
 import React, { Component, lazy, Suspense } from 'react';
-import {
-  Card,
-  CardBody,
-  Col,
-  Row,
-  UncontrolledCarousel
-} from 'reactstrap';
-import { CustomTooltips } from '@coreui/coreui-plugin-chartjs-custom-tooltips';
+import { Card,  CardBody, Col, Row,  UncontrolledCarousel } from 'reactstrap';
+
 import { getStyle, hexToRgba } from '@coreui/coreui/dist/js/coreui-utilities'
+import axios from 'axios'
+
+const apiUrl = 'http://yb-api.technow.id/api/'; 
+const token = 'Bearer ' + localStorage.getItem('token')
+const config = {
+  headers: { "Authorization": token }
+};
 
 const brandPrimary = getStyle('--primary')
 const brandSuccess = getStyle('--success')
@@ -39,73 +40,50 @@ const items = [
 ];
 
 
-class Dashboard extends Component {
+class Dashboard extends Component { 
+
   constructor(props) {
     super(props);
-
-    this.toggle = this.toggle.bind(this);
-    this.onRadioBtnClick = this.onRadioBtnClick.bind(this);
-
     this.state = {
-      dropdownOpen: false,
-      radioSelected: 2,
+        error:null,
+        users: [],
+        response: {}
     };
   }
 
-  toggle() {
-    this.setState({
-      dropdownOpen: !this.state.dropdownOpen,
-    });
-  }
-
-  onRadioBtnClick(radioSelected) {
-    this.setState({
-      radioSelected: radioSelected,
-    });
+  componentDidMount(){
+    axios.get(apiUrl + 'cluster-count', config)
+    .then(response => response.data).then(  
+      (result)=>{  
+          this.setState({  
+              users:result.data  
+          });  
+      },  
+      (error)=>{  
+          this.setState({error});  
+      }
+    )
   }
 
   loading = () => <div className="animated fadeIn pt-1 text-center">Loading...</div>
   
 
   render() {
-
-    // const { activeIndex } = this.state;
-    // const slides = items.map((item) => {
-    //   return (
-    //     <CarouselItem
-    //       onExiting={this.onExiting}
-    //       onExited={this.onExited}
-    //       key={item.src}
-    //     >
-    //       <img className="d-block w-100" src={item.src} alt={item.altText} />
-    //       <CarouselCaption captionText={item.caption} captionHeader={item.caption} />
-    //     </CarouselItem>
-    //   );
-    // });
-
-    return (
-      
-      <div className="animated fadeIn">
-        
+    const{error,users}=this.state;
+    if(error){  
+        return(  
+            <div>Error:{error.message}</div>  
+        )  
+    }  
+    else {
+    return (      
+      <div className="animated fadeIn">        
         <Row>
-          {/* <Col xs="12" sm="6" lg="3">
-            <Card className="text-white bg-info">
-              <CardBody className="pb-0">
-
-                <div className="text-value">9.823</div>
-                <div>All Students</div>
-              </CardBody>
-              <div className="chart-wrapper mx-3" style={{ height: '70px' }}>
-                <Line data={cardChartData2} options={cardChartOpts2} height={70} />
-              </div>
-            </Card>
-          </Col> */}
-
           <Col xs="12" sm="6" lg="4">
             <Card className="text-white bg-primary">
-              <CardBody className="pb-0" style={{ marginBottom:35, textAlign:'center'}}>
-                <div className="text-value" style={{ fontSize : 50 }} >9.823</div>
-                <div style={{ fontSize : 20 }}>Science</div>
+              <CardBody className="pb-0" style={{ marginBottom:35, textAlign:'center'}}>  
+                <div className="text-value" style={{ fontSize : 50 }}>xxx </div>
+                <div style={{ fontSize : 20 }}>Science</div>             
               </CardBody>
               {/* <div className="chart-wrapper mx-3" style={{ height: '70px' }}>
                 <Line data={cardChartData1} options={cardChartOpts1} height={70} />
@@ -141,24 +119,6 @@ class Dashboard extends Component {
           <Col>
             <Card>
               <UncontrolledCarousel items={items} style={{maxHeight:20}}/>
-              {/* <Carousel 
-                activeIndex={activeIndex} 
-                next={this.next} 
-                previous={this.previous}>
-                  <CarouselIndicators 
-                    items={items} 
-                    activeIndex={activeIndex} 
-                    onClickHandler={this.goToIndex} />
-                  {slides}
-                  <CarouselControl 
-                    direction="prev" 
-                    directionText="Previous" 
-                    onClickHandler={this.previous} />
-                  <CarouselControl 
-                    direction="next" 
-                    directionText="Next" 
-                    onClickHandler={this.next} />
-              </Carousel> */}
             </Card>
           </Col>
         </Row>
@@ -166,6 +126,7 @@ class Dashboard extends Component {
       </div>
       
     );
+    }
   }
 }
 
