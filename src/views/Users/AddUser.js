@@ -14,7 +14,8 @@ class AddUser extends Component{
     this.initialState = { 
       id: '',  
       name: '',  
-      address: '',  
+      address: '', 
+      cluster: '', 
       class_name: '',  
       place_of_birth: '',  
       date_of_birth: '',  
@@ -84,6 +85,7 @@ class AddUser extends Component{
                 id: '',  
                 name: users.name,  
                 address: users.address,  
+                cluster: users.cluster,
                 class_name: users.class_name,  
                 place_of_birth: users.place_of_birth,  
                 date_of_birth: users.date_of_birth,  
@@ -145,6 +147,18 @@ class AddUser extends Component{
                                 value={address}  
                                 onChange={this.onChange}  
                                 placeholder="address"/>
+                            </Col>
+                        </FormGroup>
+                        <FormGroup row>
+                            <Col md="3">
+                                <Label htmlFor="text-input">Cluster</Label>
+                            </Col>
+                            <Col xs="12" md="9">
+                                <Input type="text"  
+                                name="cluster"  
+                                
+                                onChange={this.onChange}  
+                                placeholder="cluster"/>
                             </Col>
                         </FormGroup>
                         <FormGroup row>
