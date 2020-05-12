@@ -17,44 +17,24 @@ const brandDanger = getStyle('--danger')
 
 const items = [
   {
-    src : './images/building.jpg',
+    src : './images/1.jpg',
     header: '',
     key: '1'
   },
   {
-    src: './images/hallway.jpg',
+    src: './images/2.jpg',
     header: '',
     key: '2'
   },
   {
-    src: './images/basketball.jpg',
+    src: './images/3.jpg',
     header: '',
     key: '3'
   },
   {
-    src: './images/corridor.jpg',
+    src: './images/4.jpg',
     header: '',
     key: '4'
-  },
-  {
-    src: './images/pipel.jpg',
-    header: '',
-    key: '5'
-  },
-  {
-    src: './images/corridor-1.jpg',
-    header: '',
-    key: '6'
-  },
-  {
-    src: './images/yard.jpg',
-    header: '',
-    key: '7'
-  },
-  {
-    src: './images/auditorium.jpg',
-    header: '',
-    key: '8'
   }
 ];
 
